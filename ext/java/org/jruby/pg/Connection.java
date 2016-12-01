@@ -10,6 +10,7 @@ import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.Map.Entry;
+import org.jruby.runtime.encoding.EncodingService;
 
 import org.jcodings.Encoding;
 import org.jruby.*;
@@ -1431,7 +1432,8 @@ public class Connection extends RubyObject {
 
     RubyString rubyMessage = context.runtime.newString(message);
     if(encoding != null) {
-      RubyEncoding rubyEncoding = RubyEncoding.newEncoding(context.runtime, encoding);
+      EncodingService encodingService = context.runtime.getEncodingService();
+      RubyEncoding rubyEncoding = encodingService.getEncoding(encoding);
       rubyMessage = (RubyString) rubyMessage.encode(context, rubyEncoding);
     }
     Block eBlock = Block.NULL_BLOCK;
