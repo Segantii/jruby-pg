@@ -757,7 +757,7 @@ public class Connection extends RubyObject {
     }
   }
 
-  @JRubyMethod
+  @JRubyMethod(name = "setnonblocking")
   public IRubyObject set_nonblocking(ThreadContext context, IRubyObject arg0) {
     if(arg0.isTrue()) {
       postgresConnection.setNonBlocking(true);
